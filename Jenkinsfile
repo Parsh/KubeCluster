@@ -19,5 +19,15 @@ pipeline {
 				}
 			}
 		}
+		stage('Configuring: connecting kubectl to w/ EKS cluster') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						aws eks --region ap-south-1 update-kubeconfig --name kubecluster
+					'''
+				}
+			}
+		}
+
 	}
 }
